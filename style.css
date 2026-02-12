@@ -40,8 +40,28 @@ body {
 .scene { display: none; animation: fadeIn 0.5s; }
 .scene.active { display: block; }
 
-h1, h2 { font-family: var(--font-head); color: #5D5D5D; }
-.hint { color: #999; font-size: 0.9rem; margin-top: 15px; }
+/* h1, h2 { font-family: var(--font-head); color: #5D5D5D; } 
+.hint { color: #999; font-size: 0.9rem; margin-top: 15px; } */
+
+/* ✅ ส่วนที่คุณแก้: h1, h2 ใหม่ (มีเงาขาว) */
+h1, h2 { 
+    font-family: var(--font-head); 
+    color: #5D5D5D; 
+    text-shadow: 2px 2px 0px #FFFFFF, -1px -1px 0 #FFFFFF; 
+}
+
+/* ✅ ส่วนที่คุณแก้: hint ใหม่ (มีพื้นหลังจางๆ) */
+.hint { 
+    color: #4A4A4A; 
+    font-size: 0.9rem; 
+    margin-top: 15px;
+    font-weight: 500;
+    background-color: rgba(255,255,255, 0.6);
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
 
 /* Splash Screen */
 #splash-screen {
