@@ -11,7 +11,14 @@
 }
 
 body {
-    background-color: var(--bg-color);
+   /* background-color: var(--bg-color); */
+
+   background-image: url('images/bg-smoke.jpg'); /* ระบุที่อยู่ไฟล์ภาพ */
+    background-size: cover;       /* ขยายภาพให้เต็มพื้นที่หน้าจอโดยไม่เสียสัดส่วน */
+    background-position: center center; /* จัดภาพให้อยู่กึ่งกลาง */
+    background-repeat: no-repeat; /* ไม่ให้ภาพแสดงซ้ำถ้ารูปเล็กกว่าจอ */
+    background-attachment: fixed; /* (Optional) ทำให้พื้นหลังอยู่นิ่งๆ เวลาเลื่อนหน้าจอ */
+
     font-family: var(--font-main);
     color: var(--text-color);
     margin: 0;
