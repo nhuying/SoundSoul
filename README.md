@@ -44,7 +44,7 @@
 
 1.  Clone โปรเจกต์นี้
     ```bash
-    git clone [https://github.com/your-username/soundsoul.git](https://github.com/your-username/soundsoul.git)
+    git clone [https://github.com/your-username/sound-soul.git](https://github.com/your-username/sound-soul.git)
     ```
 2.  เปิดโฟลเดอร์ด้วย VS Code
 3.  ติดตั้ง Extension **"Live Server"**
