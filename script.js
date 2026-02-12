@@ -233,3 +233,9 @@ function selectGift(giftType) {
 
     sfxSuccess.play().catch(e=>{});
 }
+
+function restartApp() {
+    // ลบค่า ?room=... ออก ให้เหลือแค่ชื่อเว็บเพียวๆ
+    const cleanURL = window.location.href.split('?')[0];
+    window.location.href = cleanURL;
+}
