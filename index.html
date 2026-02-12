@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟังสร้างสุข (Sound Soul)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600&family=Prompt:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <div class="splash-content">
+            <h1>Sound Soul</h1>
+            <div class="motto-box">
+                <p>ฟังด้วยหู</p>
+                <div class="heart-beat">❤️</div>
+                <p>ดูด้วยใจ</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-container">
+        
+        <div id="scene-lobby" class="scene active">
+            <h1>Sound Soul 🌿</h1>
+            <p>พื้นที่แห่งการฟัง เพื่อเข้าใจและเติบโตไปด้วยกัน</p>
+            <button onclick="createRoom()" class="btn-primary">🏠 สร้างห้อง (Host)</button>
+            <br><br>
+            <button onclick="joinRoomManually()" class="btn-secondary">🔍 เข้าร่วม (Join)</button>
+            <p class="hint">หรือสแกน QR Code จากเครื่องเพื่อน</p>
+        </div>
+
+        <div id="scene-waiting" class="scene">
+            <h2>ห้องสนทนาพร้อมแล้ว!</h2>
+            <p>ให้เพื่อนสแกน QR Code นี้เพื่อเข้าร่วม</p>
+            <div id="qrcode-display" style="display:flex; justify-content:center; margin: 20px;"></div>
+            <p>รหัสห้อง: <strong id="room-id-display">...</strong></p>
+            <p id="connection-status">รอเพื่อนเข้าร่วม...</p>
+            <button onclick="startGame()" class="btn-primary">เริ่มวงสนทนา</button>
+        </div>
+
+        <div id="scene-rules" class="scene">
+            <h2>ก่อนเริ่ม... มาปรับคลื่นหัวใจกัน ❤️</h2>
+            <div class="rules-container">
+                <div class="rule-row">
+                    <span class="bad">📱 ดูมือถือ</span> <span class="arrow">➜</span> <span class="good">👁️ สบแววตา</span>
+                </div>
+                <div class="rule-row">
+                    <span class="bad">🗣️ พูดสวน</span> <span class="arrow">➜</span> <span class="good">👂 ฟังให้จบ</span>
+                </div>
+                <div class="rule-row">
+                    <span class="bad">🧠 เสียงในหัว</span> <span class="arrow">➜</span> <span class="good">👤 คนตรงหน้า</span>
+                </div>
+                <div class="rule-row highlight">
+                    <span class="bad">👂 ฟังด้วยหู</span> <span class="arrow">➜</span> <span class="good">❤️ ฟังด้วยใจ</span>
+                </div>
+            </div>
+            <p class="fade-text">หายใจเข้าลึกๆ... แล้วเริ่มกันเลย</p>
+            
+            <div id="host-rule-controls" style="display:none; margin-top: 20px;">
+                <button onclick="confirmRules()" class="btn-primary">🍃 พร้อมรับฟังแล้ว</button>
+            </div>
+            <p id="waiting-host-text" class="hint">รอ Host กดเริ่ม...</p>
+        </div>
+
+        <div id="scene-game" class="scene">
+            <h2 id="category-title">หมวด: Hello 👋</h2>
+            <div class="card" id="question-card">
+                <p id="question-text">กำลังรอคำถาม...</p>
+            </div>
+            
+            <div class="controls" id="host-controls" style="display:none;">
+                <button onclick="nextCard()" class="btn-primary">คำถามถัดไป ➜</button>
+            </div>
+            <p class="hint" id="player-role-text"></p>
+        </div>
+
+        <div id="scene-reflection" class="scene">
+            <h2>🎁 ส่งของขวัญทางใจ</h2>
+            <p>เลือกความรู้สึกที่คุณอยากมอบให้เพื่อนในวง</p>
+            
+            <div class="gift-grid">
+                <button onclick="selectGift('Warmth')" class="gift-btn">☀️ ความอบอุ่น</button>
+                <button onclick="selectGift('Inspiration')" class="gift-btn">💡 แรงบันดาลใจ</button>
+                <button onclick="selectGift('Comfort')" class="gift-btn">🌳 ความสบายใจ</button>
+                <button onclick="selectGift('Understanding')" class="gift-btn">👂 การรับฟัง</button>
+            </div>
+        </div>
+
+        <div id="scene-end" class="scene">
+            <h1>ขอบคุณที่รับฟังกัน</h1>
+            <div class="summary-card">
+                <p>วันนี้คุณเป็นผู้ฟังที่ยอดเยี่ยม</p>
+                <div id="received-gift-display" style="font-size: 1.2rem; color: var(--accent-empathy);"></div>
+            </div>
+            
+            <div class="final-message">
+                #ทุกปัญหาดีขึ้นได้ด้วย..การฟัง
+            </div>
+
+            <button onclick="location.href='/'" class="btn-secondary" style="margin-top:20px;">เริ่มใหม่</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Register Service Worker for Offline Use
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>

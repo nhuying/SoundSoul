@@ -1,0 +1,83 @@
+:root {
+    --bg-color: #FDFCF0;
+    --card-bg: #FFFFFF;
+    --text-color: #4A4A4A;
+    --accent-hello: #FFDB58;
+    --accent-listen: #8A9A5B;
+    --accent-learn: #779ECB;
+    --accent-empathy: #E2725B;
+    --font-main: 'Prompt', sans-serif;
+    --font-head: 'Mali', cursive;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-main);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#app-container {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Scene Management */
+.scene { display: none; animation: fadeIn 0.5s; }
+.scene.active { display: block; }
+
+h1, h2 { font-family: var(--font-head); color: #5D5D5D; }
+.hint { color: #999; font-size: 0.9rem; margin-top: 15px; }
+
+/* Splash Screen */
+#splash-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bg-color);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999; transition: opacity 1s ease-out;
+}
+.splash-content { text-align: center; animation: floatUp 1.5s ease-out; }
+.motto-box { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.5rem; font-family: var(--font-head); }
+.heart-beat { animation: heartbeat 1.5s infinite; font-size: 2rem; }
+
+/* Rules */
+.rules-container { background: white; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.rule-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; }
+.rule-row:last-child { border-bottom: none; }
+.bad { color: #aaa; text-decoration: line-through; font-size: 0.9rem; }
+.good { color: var(--accent-empathy); font-weight: 600; }
+.highlight .good { color: #d64045; transform: scale(1.1); display: inline-block; }
+
+/* Card */
+.card {
+    background: var(--card-bg); border-radius: 20px; padding: 30px; margin: 20px 0;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); min-height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; line-height: 1.6; border-top: 10px solid var(--accent-hello);
+    transition: opacity 0.3s;
+}
+
+/* Buttons */
+.btn-primary { background: var(--accent-empathy); color: white; border: none; padding: 12px 30px; border-radius: 50px; font-size: 1rem; cursor: pointer; width: 100%; margin-bottom: 10px; }
+.btn-secondary { background: #E0E0E0; color: #333; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; width: 100%; }
+
+/* Gifts */
+.gift-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gift-btn { padding: 15px; background: white; border: 2px solid #EEE; border-radius: 10px; cursor: pointer; }
+
+/* Final Message */
+.final-message { margin: 30px 0; font-family: var(--font-head); color: var(--accent-empathy); font-size: 1.2rem; font-weight: bold; opacity: 0; animation: fadeInUp 2s ease-out forwards 0.5s; }
+
+/* Keyframes */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes floatUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeInUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes heartbeat { 0% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1); } 45% { transform: scale(1.15); } 60% { transform: scale(1); } }
+.fade-out { opacity: 0; pointer-events: none; }
